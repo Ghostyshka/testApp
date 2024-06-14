@@ -35,4 +35,7 @@ public class Customer {
     @Column(name = "is_active", columnDefinition = "BOOL")
     private Boolean isActive = true;
 
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 }
