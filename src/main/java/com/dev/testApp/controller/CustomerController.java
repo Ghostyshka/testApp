@@ -18,28 +18,28 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     // Create customer
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Customer> createCustomer( @RequestBody Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCustomer);
     }
 
     // Read all customers
-    @GetMapping
+    @GetMapping("/get/all")
     public ResponseEntity<List<Customer>> getAllCustomers() {
         List<Customer> customers = customerRepository.findAll();
         return ResponseEntity.ok(customers);
     }
 
     // Read customer by ID
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
         Optional<Customer> customer = customerRepository.findById(id);
         return customer.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     // Update customer
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id,@RequestBody Customer updatedCustomer) {
         Optional<Customer> optionalCustomer = customerRepository.findById(id);
         if (optionalCustomer.isPresent()) {
